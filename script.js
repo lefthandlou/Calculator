@@ -34,6 +34,7 @@ let numButtons = document.querySelectorAll('.numButton');
 let clearButton = document.querySelector('.clearButton');
 let calcDisplay = document.querySelector('.displayContainer');
 let array = [];
+let operator = [];
 
 clearButton.addEventListener('click', () => location.reload());
 
@@ -43,7 +44,12 @@ function chooseNumbers() { numButtons.forEach(button => button.addEventListener(
         console.log(array);
         let numDisplay = (array.join(''));
         calcDisplay.textContent = numDisplay;
-        console.log(numDisplay);
+        let displayNums = numDisplay.split(/[+/\-*]/);
+        console.log(displayNums);
+        let a=displayNums[0];
+        let b=displayNums[1];
+        console.log(a);
+        console.log(b);
     }))
 };
 
