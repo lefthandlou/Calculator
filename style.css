@@ -1,0 +1,95 @@
+body {
+    background-color:#4C1036;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #93E1D8;
+}
+
+.title {
+    text-align: center;
+}
+
+.mainContainer {
+    display: flex;
+    justify-content: center;
+}
+.calculatorBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 345px;
+    height: 450px;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: #171738;
+    box-shadow: 3px 5px;
+}
+
+.displayContainer {
+    display: flex;
+    justify-content: end;
+    width: 315px;
+    height: 75px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: #BAD1CD;
+    text-align: center;
+    color: black;
+    box-shadow: 4px 4px;
+    align-items: center;
+    
+}
+
+.numPadContainer {
+   display: flex;
+}
+
+.leftContainer {
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+}
+
+.numButtonsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 250px;
+}
+
+.operatorsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    width: 67px;
+    height: 55px;
+    margin: 2px;
+    border-radius: 50px;
+    border: 1px solid black;
+    background-color: #FF9770;
+    box-shadow: 2px 2px;
+}
+
+.clearButton,
+.equalButton, 
+.zero,
+.period {
+    width: 100px;
+    background-color: #6B717E;
+
+}
+
+.operator{
+    background-color: #A93F55;
+}
+
+/*Color palette*/
+/* CSS HEX */
+/* --opal: #bad1cdff;
+--slate-gray: #6b717eff;
+--light-salmon: #ff9770ff;
+--tyrian-purple: #4c1036ff;
+--space-cadet: #171738ff; 
+--amaranth-purple: #A43D51;*/
