@@ -1,57 +1,91 @@
-/*
-event listener - decide if using one or multiple
-    would it be num listener, operator listener, num listener?
-
-when clicked, buttons need their value show upon the display;
-if multi-digit numbers are input, that all needs to show up.
-Button clicks need to be stored for use in equation;
-Operator clicks need to pull correct math equation function
-So equals button listener needs to be the final listener that summons all?
-Clear button listener to refresh page and start over
-
-*/
-
-// addEVentListener for each num button; let buttonContent = button.textContent;
-// push to array 
-
-//let a = eventListener 1
-//let b = eventListener 3
-// let function = eL1 (eL2) el3;
-// return product
-
-//TODO set up numpad event listener to concat all numbers (including zeros and
-// periods) clicked before operator; display and store; save as a
-//TODO set up operator listener; display operator chosen, store or give class
-//TODO numpad event again; store as b
-//TODO wire up equals EL to take stored a, b, and operator and summon correct
-//math function, return result
-// also, how do I get the value from the button clicked??
-
-// WHAT I'VE TRIED - NUMPAD EVENT LISTENER
-//      for loop to push choice to array, allowing multiple numbers to concat XX
-
 let numButtons = document.querySelectorAll('.numButton');
 let clearButton = document.querySelector('.clearButton');
+let operatorButtons = document.querySelectorAll('.operator');
+let operatorArray=Array.from(operatorButtons);
 let calcDisplay = document.querySelector('.displayContainer');
 let array = [];
-let operator = [];
+let equals = document.querySelector('.equalButton');
 
 clearButton.addEventListener('click', () => location.reload());
 
-function chooseNumbers() { numButtons.forEach(button => button.addEventListener('click', function handleClick(e){
-        let numberChoice = button.textContent;
-        array.push(numberChoice);
-        console.log(array);
-        let numDisplay = (array.join(''));
-        calcDisplay.textContent = numDisplay;
-        let displayNums = numDisplay.split(/[+/\-*]/);
-        console.log(displayNums);
-        let a=displayNums[0];
-        let b=displayNums[1];
-        console.log(a);
-        console.log(b);
-    }))
-};
+numButtons.forEach(button => button.addEventListener('click', ( ) => {
+    let numberChoice = button.textContent;
+    array.push(numberChoice);
+    console.log(array);
+    calcDisplay.textContent = (array.join(''));
+}))
 
+operatorArray.forEach(operator => {
+    operator.addEventListener('click', function handleClick(event) {
+        operator.classList.add('clicked');
+    })
+})
 
-chooseNumbers();
+function makeParameterA() {
+    let numDisplay = (array.join(''));
+    let displayNums = numDisplay.split(/[+/\-*]/);
+    let strA=displayNums[0];
+    let a = parseInt(strA);
+    console.log(a);
+    return a;
+}
+
+function makeParameterB() {
+    let numDisplay = (array.join(''));
+    let displayNums = numDisplay.split(/[+/\-*]/);
+    let strB=displayNums[1];
+    let b = parseInt(strB);
+    return b;
+}
+
+function addition() {
+    let a = makeParameterA();
+    let b = makeParameterB();
+    let sum = a + b;
+    calcDisplay.textContent = sum.toFixed(2);
+    return sum;
+}
+
+function subtraction() {
+    let a = makeParameterA();
+    let b = makeParameterB();
+    let difference = a - b;
+    calcDisplay.textContent = difference.toFixed(2);
+    return difference;
+}
+
+function multiply() {
+    let a = makeParameterA();
+    let b = makeParameterB();
+    let product = a * b;
+    calcDisplay.textContent = product.toFixed(2);
+    return product;
+}
+
+function divide() {
+    let a = makeParameterA();
+    let b = makeParameterB();
+    let quotient = a / b;
+    calcDisplay.textContent = quotient.toFixed(2);
+    return quotient;
+}
+
+function whichOperator() {
+    if (document.getElementById('add').classList.contains('clicked')) {
+        addition();
+    } else if (document.getElementById('subtract').classList.contains('clicked')) {
+        subtraction();
+    } else if (document.getElementById('multiply').classList.contains('clicked')) {
+        multiply();
+    } else if (document.getElementById('divide').classList.contains('clicked')) {
+        divide();
+    };
+}
+
+function makeMath() {
+    equals.addEventListener('click', () => {
+        whichOperator();
+    })  
+}
+
+console.log(makeMath());
