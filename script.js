@@ -1,10 +1,26 @@
+
+
+//pop? unshift?
+//array objects, and constructor function? add event handler?
+//constructor function?
+
+// Event listener to display and store first number 
+// Event listener to display and store operator clicked; call operator function
+// Event listener for equals
+
+
 let numButtons = document.querySelectorAll('.numButton');
 let clearButton = document.querySelector('.clearButton');
 let operatorButtons = document.querySelectorAll('.operator');
 let operatorArray=Array.from(operatorButtons);
 let calcDisplay = document.querySelector('.displayContainer');
 let array = [];
+let resultsArray = [];
 let equals = document.querySelector('.equalButton');
+let add = document.getElementById('add')
+let subtract = document.getElementById('subtract');
+let multiply = document.getElementById('multiply');
+let divide = document.getElementById('divide');
 
 clearButton.addEventListener('click', () => location.reload());
 
@@ -20,12 +36,19 @@ operatorArray.forEach(operator => {
     })
 })
 
+
 function makeParameterA() {
-    let numDisplay = (array.join(''));
-    let displayNums = numDisplay.split(/[+/\-*]/);
-    let strA=displayNums[0];
-    let a = parseFloat(strA);
-    return a;
+    if (resultsArray.length === 0) {
+        let numDisplay = (array.join(''));
+        let displayNums = numDisplay.split(/[+/\-*]/);
+        let strA=displayNums[0];
+        let a = parseFloat(strA);
+        return a;
+    } else {
+        let strA = resultsArray[0];
+        let a = parseFloat(strA);
+        return a;
+    }
 }
 
 function makeParameterB() {
@@ -41,6 +64,7 @@ function addition() {
     let b = makeParameterB();
     let sum = a + b;
     calcDisplay.textContent = sum;
+    resultsArray.unshift(sum);
     return sum;
 }
 
@@ -49,34 +73,45 @@ function subtraction() {
     let b = makeParameterB();
     let difference = a - b;
     calcDisplay.textContent = difference;
+    resultsArray.unshift(difference);
     return difference;
 }
 
-function multiply() {
+function multiplication() {
     let a = makeParameterA();
     let b = makeParameterB();
     let product = a * b;
     calcDisplay.textContent = product;
+    resultsArray.unshift(product);
     return product;
 }
 
-function divide() {
+function division() {
     let a = makeParameterA();
     let b = makeParameterB();
     let quotient = a / b;
     calcDisplay.textContent = quotient;
+    resultsArray.unshift(quotient);
     return quotient;
 }
 
 function whichOperator() {
-    if (document.getElementById('add').classList.contains('clicked')) {
+    if (add.classList.contains('clicked')) {
         addition();
-    } else if (document.getElementById('subtract').classList.contains('clicked')) {
+        add.classList.remove('clicked');
+        array = [];
+    } else if (subtract.classList.contains('clicked')) {
         subtraction();
-    } else if (document.getElementById('multiply').classList.contains('clicked')) {
-        multiply();
-    } else if (document.getElementById('divide').classList.contains('clicked')) {
-        divide();
+        subtract.classList.remove('clicked');
+        array = [];
+    } else if (multiply.classList.contains('clicked')) {
+        multiplication();
+        multiply.classList.remove('clicked');
+        array = [];
+    } else if (divide.classList.contains('clicked')) {
+        division();
+        divide.classList.remove('clicked');
+        array = [];
     };
 }
 
@@ -85,5 +120,10 @@ function makeMath() {
         whichOperator();
     })  
 }
+    
 
 console.log(makeMath());
+
+
+    
+    
